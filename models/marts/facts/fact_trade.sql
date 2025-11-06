@@ -1,6 +1,7 @@
 -- models/marts/facts/fact_trade.sql
 {{ config(
     materialized='table',
+    schema='marts',
     tags=['fact', 'trade']
 ) }}
 
