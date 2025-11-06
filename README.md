@@ -1,4 +1,5 @@
-#  Solar Data Warehouse — Cloud ELT Project
+#  Solar Data Warehouse — Cloud ELT Project 
+![ELT-solar](https://github.com/user-attachments/assets/69ff73d7-8de2-46fb-b99f-137f2270163e)
 
 ## Description du projet
 
@@ -38,7 +39,8 @@ Ce pipeline de données intègre plusieurs technologies cloud :
 
 ##  Architecture Snowflake + dbt
 
-![Snowflake Gold Layer](./Goldsnowflake.png)
+![Snowflake Gold Layer](./Goldsnowflake.png) <img width="1874" height="941" alt="Goldsnowflake" src="https://github.com/user-attachments/assets/65447711-0c64-4de7-a6af-30a8a1648804" />
+
 
 ###  Couches de données
 - **BRONZE** : ingestion brute depuis S3 (`raw_*`)
@@ -58,7 +60,8 @@ Ce pipeline de données intègre plusieurs technologies cloud :
 
 ##  Modélisation dbt
 
-![dbt Lineage Graph](./datalineage.png)
+![dbt Lineage Graph](./datalineage.png) <img width="1871" height="944" alt="datalineage" src="https://github.com/user-attachments/assets/d429d1de-de30-4694-aa31-546e9e2e3569" />
+
 
 Le graphe montre le flux complet :
 - Sources : `bronze.raw_*`
@@ -75,7 +78,8 @@ Le graphe montre le flux complet :
 
 ##  Stockage AWS S3
 
-![S3 Bucket](./storageS3.png)
+![S3 Bucket](./storageS3.png)<img width="1854" height="837" alt="storageS3" src="https://github.com/user-attachments/assets/b0d1012e-8d04-492a-bb4c-7637f1e5f8e3" />
+
 
 Les fichiers bruts sont stockés dans :
 `s3://solar-s3-staging/`
@@ -90,7 +94,8 @@ Exemples :
 
 ## ⚙️ Pipeline de transformation
 
-![dbt Execution](./Screenshot%202025-11-06%20134421.png)
+![dbt Execution](./Screenshot%202025-11-06%20134421.png)<img width="1867" height="921" alt="Screenshot 2025-11-06 134421" src="https://github.com/user-attachments/assets/1732a861-78fe-4ad0-9524-443c9ec7a906" />
+
 
 Résultat de l’exécution :
 -  9 modèles exécutés avec succès
@@ -127,4 +132,5 @@ WHERE TABLE_SCHEMA = 'MARTS';
 **Hassan Saleban**  
 📍 *Bruxelles Formation — Data Engineer *  
 [GitHub : HassanSaleban](https://github.com/HassanSaleban)
+
 
