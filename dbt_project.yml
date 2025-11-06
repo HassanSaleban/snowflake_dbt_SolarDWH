@@ -1,0 +1,48 @@
+name: 'solar_eu'
+version: '1.0.0'
+config-version: 2
+profile: 'solar_eu'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "logs"
+
+models:
+  solar_eu:
+    staging:
+      +materialized: view
+      +schema: staging
+      +tags: ['staging']
+      
+    marts:
+      +materialized: table
+      +schema: marts
+      
+      dimensions:
+        +materialized: table
+        +tags: ['dimension']
+        
+      facts:
+        +materialized: table
+        +tags: ['fact']
+
+seeds:
+  solar_eu:
+    +schema: staging
+
+vars:
+  start_date: '2018-01-01'
+  end_date: '2024-12-31'
+
+query-comment: "dbt Cloud - Solar EU Project"
+
+dbt-cloud:
+  project-id: 70471823521426
