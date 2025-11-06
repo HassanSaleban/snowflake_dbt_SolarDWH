@@ -22,17 +22,21 @@ models:
   solar_eu:
     staging:
       +materialized: view
+      +schema: staging
       +tags: ['staging']
       
     marts:
       +materialized: table
+      +schema: marts
       
       dimensions:
         +materialized: table
+        +schema: marts
         +tags: ['dimension']
         
       facts:
         +materialized: table
+        +schema: marts
         +tags: ['fact']
 
 seeds:
