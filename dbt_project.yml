@@ -1,6 +1,9 @@
+# dbt_project.yml - Configuration pour Snowflake Cloud
+
 name: 'solar_eu'
 version: '1.0.0'
 config-version: 2
+
 profile: 'solar_eu'
 
 model-paths: ["models"]
@@ -19,12 +22,10 @@ models:
   solar_eu:
     staging:
       +materialized: view
-      +schema: staging
       +tags: ['staging']
       
     marts:
       +materialized: table
-      +schema: marts
       
       dimensions:
         +materialized: table
@@ -43,6 +44,3 @@ vars:
   end_date: '2024-12-31'
 
 query-comment: "dbt Cloud - Solar EU Project"
-
-dbt-cloud:
-  project-id: 70471823521426
