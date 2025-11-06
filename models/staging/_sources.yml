@@ -1,0 +1,106 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: "Données brutes chargées depuis S3 via Snowpipe"
+    database: solardb
+    schema: bronze
+    
+    tables:
+      - name: raw_export_china
+        description: "Exportations de la Chine vers l'UE (clean tech products)"
+        columns:
+          - name: area
+            description: "Pays de destination"
+          - name: date
+            description: "Date de l'export (format DATE ou VARCHAR)"
+          - name: region
+            description: "Région"
+          - name: commodity_code
+            description: "Code du produit"
+          - name: commodity_category
+            description: "Catégorie du produit"
+          - name: commodity_sub_category
+            description: "Sous-catégorie du produit"
+          - name: amount_usd
+            description: "Montant en USD"
+            
+      - name: raw_import_ue
+        description: "Importations de l'UE depuis le monde entier"
+        columns:
+          - name: country_or_area
+            description: "Pays importateur (UE)"
+          - name: year
+            description: "Année de l'import"
+          - name: comm_code
+            description: "Code HS du produit"
+          - name: commodity
+            description: "Description du produit"
+          - name: flow
+            description: "Type de flux (Import)"
+          - name: trade_usd
+            description: "Valeur commerciale en USD"
+          - name: weight_kg
+            description: "Poids en kg"
+          - name: quantity_code
+            description: "Code de quantité"
+          - name: quantity_name
+            description: "Nom de la quantité"
+          - name: quantity
+            description: "Quantité"
+            
+      - name: raw_batteries
+        description: "Catalogue des batteries (produits de stockage)"
+        columns:
+          - name: id
+            description: "Identifiant unique"
+          - name: code_hs
+            description: "Code HS (harmonized system)"
+          - name: type
+            description: "Type de batterie"
+          - name: sous_type
+            description: "Sous-type"
+          - name: statut
+            description: "Statut du produit"
+          - name: usage
+            description: "Usage"
+          - name: application
+            description: "Application"
+            
+      - name: raw_photovoltaique
+        description: "Catalogue des produits photovoltaïques (panneaux, cellules)"
+        columns:
+          - name: id
+            description: "Identifiant unique"
+          - name: code_hs
+            description: "Code HS"
+          - name: type
+            description: "Type de produit PV"
+          - name: sous_type
+            description: "Sous-type"
+          - name: statut
+            description: "Statut"
+          - name: usage
+            description: "Usage"
+          - name: application
+            description: "Application"
+            
+      - name: raw_production_ue
+        description: "Production d'électricité solaire par pays UE"
+        columns:
+          - name: country_or_area
+            description: "Pays de l'UE"
+          - name: year
+            description: "Année de production"
+          - name: unit
+            description: "Unité de mesure"
+          - name: quantity
+            description: "Quantité produite"
+
+    # Configuration de fraîcheur des données
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+    
+    # Chargement paresseux (lazy loading)
+    loaded_at_field: _loaded_at
