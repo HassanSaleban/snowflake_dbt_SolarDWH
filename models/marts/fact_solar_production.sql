@@ -3,6 +3,7 @@
 
 {{ config(
     materialized='table',
+    schema='marts',
     tags=['fact', 'production']
 ) }}
 

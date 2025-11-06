@@ -1,8 +1,7 @@
 -- models/marts/facts/fact_trade.sql
--- Fait : Commerce international (imports + exports)
-
 {{ config(
     materialized='table',
+    schema='marts',
     tags=['fact', 'trade']
 ) }}
 
@@ -47,30 +46,23 @@ all_trade as (
 final as (
     select
         ROW_NUMBER() over (order by t.trade_date, t.country, t.code_hs_4digit) as trade_key,
-        
         TO_NUMBER(TO_CHAR(t.trade_date, 'YYYYMMDD')) as date_key,
         c.country_key,
         p.product_key,
-        
         t.trade_direction,
         t.source_country,
-        
         t.trade_value_usd,
         t.weight_kg,
         t.quantity,
         t.quantity_name,
-        
         case 
             when t.weight_kg > 0 then t.trade_value_usd / t.weight_kg
             else null
         end as unit_price_usd_per_kg,
-        
         t.trade_year,
         t.trade_month,
         t.trade_date,
-        
         CURRENT_TIMESTAMP() as dbt_loaded_at
-        
     from all_trade t
     left join {{ ref('dim_country') }} c 
         on t.country = c.country_name
@@ -79,5 +71,3 @@ final as (
 )
 
 select * from final
-```
-
